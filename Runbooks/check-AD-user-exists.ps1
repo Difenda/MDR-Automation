@@ -19,7 +19,7 @@ $ErrorMessage = $_.Exception.Message
     $userName = $myCredential.UserName
     $securePassword = $myCredential.Password
   $Credential = New-Object System.Management.Automation.PSCredential ($userName,$securePassword)
-  $getuser = Get-ADUser -Filter "UserPrincipalName -like '*$UPN*'" -Server $server -Credential $Credential -ErrorAction Stop|Select Name,Enabled,UserPrincipalName,SamAccountName| ConvertTo-JSON
+  $getuser = Get-ADUser -Filter {UserPrincipalName -eq $UPN} -Server $server -Credential $Credential -ErrorAction Stop|Select Name,Enabled,UserPrincipalName,SamAccountName| ConvertTo-JSON
   }
   catch {
    $ErrorMessage = $_.Exception.Message
